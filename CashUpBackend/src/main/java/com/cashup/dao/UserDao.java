@@ -24,6 +24,13 @@ public interface UserDao extends JpaRepository<UserRegister, Integer> {
 	@Query(value = "update users set balance=:new_bal where uid=:uid",countQuery="update users set balance=:new_bal where uid=:uid" ,nativeQuery=true)
 	@Transactional
 	public void getByChangeBal(@Param("new_bal") double new_bal,@Param("uid") int uid);
+	
+	@Query(value = "select sum(reward_points) from users where uid=:uid",nativeQuery=true)
+	public double getByRewards(@Param("uid") int uid);
+	 @Modifying 
+	@Query(value = "update users set reward_points=:new_rewards where uid=:uid",countQuery="update users set reward_points=:new_rewards where uid=:uid" ,nativeQuery=true)
+	 @Transactional
+	public void getByUpdateRewards(@Param("new_rewards") double new_bal,@Param("uid") int uid);
 
 
 

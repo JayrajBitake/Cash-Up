@@ -61,9 +61,17 @@ public class UserCotroller {
 		double purchase=Integer.parseInt(price);
 		int user_id=Integer.parseInt(uid);
 		double currentBalance=uDao.getByAddBalance(user_id);
+		double rewards=uDao.getByRewards(user_id);
+		
+		
 
 		 double netBal=currentBalance-purchase;
+		 if(purchase>50)
+		 {
+			rewards=rewards+10; 
+		 }
 		 uDao.getByChangeBal(netBal, user_id);
+		 uDao.getByUpdateRewards(rewards, user_id);
 		 return "purchased";
 		
 		
