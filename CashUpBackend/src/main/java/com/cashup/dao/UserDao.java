@@ -1,9 +1,13 @@
 package com.cashup.dao;
 
+
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cashup.model.UserRegister;
 
@@ -14,5 +18,19 @@ public interface UserDao extends JpaRepository<UserRegister, Integer> {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@Query(value = "select sum(balance) from users where uid=:uid",nativeQuery=true)
+	public double getByAddBalance(@Param("uid") int uid);
+	@Modifying
+	@Query(value = "update users set balance=:new_bal where uid=:uid",countQuery="update users set balance=:new_bal where uid=:uid" ,nativeQuery=true)
+	@Transactional
+	public void getByChangeBal(@Param("new_bal") double new_bal,@Param("uid") int uid);
+
+
+
+	
+	
+
+	
+	
 	
 }

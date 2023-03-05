@@ -42,4 +42,19 @@ public class UserServiceImpl implements UserService{
 		}
 	}
 
+	@Override
+	public void modify(UserRegister ur) {
+		user.save(ur);
+		
+	}
+
+	
+//
+//	@Override
+//	public double addBalance(int amount, int uid) {
+//		user.getByAddBalance(uid);
+//		return amount;
+//	}
+
+	
 }

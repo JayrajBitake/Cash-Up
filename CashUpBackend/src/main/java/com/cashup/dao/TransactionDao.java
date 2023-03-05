@@ -10,9 +10,5 @@ import com.cashup.model.UserRegister;
 @Repository
 public interface TransactionDao  extends JpaRepository<Transaction, Integer> {
 	
-	
-	
-		
-
 }
 

@@ -12,17 +12,15 @@ import javax.persistence.Table;
 public class Transaction {
 	 @Id
 	  @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int uid;
 	private String tid;
 	private Date tDate;
 	private double currentBalance;
 	private double tamount;
-	public int getUid() {
-		return uid;
-	}
-	public void setUid(int uid) {
-		this.uid = uid;
-	}
+	private Integer pointsEarned;
+	private Character isRedeemed;
+	
+	
+	
 	public String getTid() {
 		return tid;
 	}
