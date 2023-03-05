@@ -2,6 +2,7 @@ package com.cashup.services;
 
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cashup.dao.TransactionDao;
@@ -10,10 +11,10 @@ import com.cashup.model.Transaction;
 
 @Service
 public class TransactionServiceImpl implements TransactionService {
+	@Autowired
 	private TransactionDao tdao;
 	@Override
 	public void create(Transaction tx) {
-		
 		tdao.save(tx);
 	}
 

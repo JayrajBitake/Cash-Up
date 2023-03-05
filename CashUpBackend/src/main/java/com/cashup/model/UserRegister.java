@@ -25,6 +25,7 @@ public class UserRegister {
 	private String city;
 	private String mobileno;
 	private Integer rewardPoints;
+	private Double totalExpense=0.00;
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "uid")
@@ -84,6 +85,13 @@ public class UserRegister {
 	public void setMobileno(String mobileno) {
 		this.mobileno = mobileno;
 	}
+	public Double getTotalExpense() {
+		return totalExpense;
+	}
+	public void setTotalExpense(Double totalExpense) {
+		this.totalExpense = totalExpense;
+	}
+	
 	
 	
 	

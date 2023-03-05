@@ -62,6 +62,8 @@ public class UserCotroller {
 		int user_id=Integer.parseInt(uid);
 		double currentBalance=uDao.getByAddBalance(user_id);
 		double rewards=uDao.getByRewards(user_id);
+		double expense=uDao.getByTotalExpense(user_id);
+		double totalExpense=expense+purchase;
 		
 		
 
@@ -69,9 +71,11 @@ public class UserCotroller {
 		 if(purchase>50)
 		 {
 			rewards=rewards+10; 
+			//return "Congrats u won rewards";
 		 }
 		 uDao.getByChangeBal(netBal, user_id);
 		 uDao.getByUpdateRewards(rewards, user_id);
+		 uDao.getByChangeTotalExp(totalExpense, user_id);
 		 return "purchased";
 		
 		

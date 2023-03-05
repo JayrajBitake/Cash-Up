@@ -29,8 +29,17 @@ public interface UserDao extends JpaRepository<UserRegister, Integer> {
 	public double getByRewards(@Param("uid") int uid);
 	 @Modifying 
 	@Query(value = "update users set reward_points=:new_rewards where uid=:uid",countQuery="update users set reward_points=:new_rewards where uid=:uid" ,nativeQuery=true)
-	 @Transactional
+	 @Transactional//manually commit tx
 	public void getByUpdateRewards(@Param("new_rewards") double new_bal,@Param("uid") int uid);
+	 
+	 
+	 
+	 @Query(value = "select sum(total_expense) from users where uid=:uid",nativeQuery=true)
+		public double getByTotalExpense(@Param("uid") int uid);
+		@Modifying
+		@Query(value = "update users set total_expense=:texp where uid=:uid",countQuery="update users set total_expense=:texp where uid=:uid" ,nativeQuery=true)
+		@Transactional
+		public void getByChangeTotalExp(@Param("texp") double texp,@Param("uid") int uid);
 
 
 
