@@ -2,29 +2,37 @@ package com.cashup.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 @Entity
 @Table(name="transaction")
 public class Transaction {
 	 @Id
 	  @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String tid;
+	private int tid;
 	private Date tDate;
-	private double currentBalance;
+	 @Column(columnDefinition = "integer default 0")
 	private double tamount;
+	 @Column(columnDefinition = "integer default 0")
 	private Integer pointsEarned;
+	 @Column(columnDefinition = "varchar(255) default 'N'")
 	private Character isRedeemed;
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	private UserRegister ureg;
 	
 	
 	
-	public String getTid() {
+	public int getTid() {
 		return tid;
 	}
-	public void setTid(String tid) {
+	public void setTid(int tid) {
 		this.tid = tid;
 	}
 	public Date gettDate() {
@@ -33,12 +41,7 @@ public class Transaction {
 	public void settDate(Date tDate) {
 		this.tDate = tDate;
 	}
-	public double getCurrentBalance() {
-		return currentBalance;
-	}
-	public void setCurrentBalance(double currentBalance) {
-		this.currentBalance = currentBalance;
-	}
+	
 	public double getTamount() {
 		return tamount;
 	}
