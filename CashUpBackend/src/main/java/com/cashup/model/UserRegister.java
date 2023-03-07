@@ -15,6 +15,9 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -39,13 +42,16 @@ public class UserRegister {
 	 @Size(max=10, message = "Mobile No should be 10 digits")
 	 @Size(max=10, message = "Mobile No should be 10 digits")
 	private String mobileno;
+	
 	 @Column(columnDefinition = "integer default 0")
 	private Integer rewardPoints;
+	
 	 @Column(columnDefinition = "integer default 0")
 	private Double totalExpense;
 	
-	@OneToMany(mappedBy="ureg",cascade = CascadeType.ALL)
-	private List<Transaction> userTransactions=new ArrayList<>();
+	@OneToMany(cascade = CascadeType.ALL,mappedBy="userRegister")
+	@JsonIgnore
+	private List<Transaction> userTransactions;
 	public Double getBalance() {
 		return balance;
 	}

@@ -1,5 +1,7 @@
 package com.cashup.dao;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -19,6 +21,10 @@ public interface TransactionDao  extends JpaRepository<Transaction, Integer> {
 	@Query(value = "update transaction set points_earned=:points_earned where tid=:tid",countQuery="update transaction set points_earned=:points_earned where tid=:tid" ,nativeQuery=true)
 	 @Transactional//manually commit tx
 	public void getByUpdatePointsEarned(@Param("points_earned") double new_bal,@Param("tid") int tid);
+	 
+	 
+	 @Query(value="select * from transaction where uid=:uid",nativeQuery=true)
+		public List<Transaction> findUserId(@Param("uid") int id);
 	 
 	
 }

@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cashup.dao.TransactionDao;
 import com.cashup.dao.UserDao;
+import com.cashup.dto.TransactionDto;
 import com.cashup.model.Transaction;
 import com.cashup.model.UserRegister;
+import com.cashup.model.Vendor;
 import com.cashup.services.TransactionService;
 import com.cashup.services.UserService;
 @RestController
@@ -22,18 +24,20 @@ public class TransactionController {
 	@Autowired
 	private TransactionService tservice;
 	@Autowired
-	//private UserRegister ureg;
 	private UserDao uDao;
-	private TransactionDao tDao;
+	@Autowired
+	private Vendor vendor;
+	
+	
 	
 	@PostMapping(value = {"/createtx/{uid}"}) 
-	public String txAdd(@RequestBody Transaction tx ,@PathVariable String uid) {
+	public String txAdd(@RequestBody TransactionDto txd,@PathVariable  String uid) {
 		//List<Transaction> userTransactions =new ArrayList<>();
 		//userTransactions.add(tx);
 		//ureg.setUserTransactions(userTransactions);
 		
-		tservice.create(tx);
-		double purchase=tx.getTamount();
+		tservice.create(txd);
+		double purchase=vendor.getPrice1();
 		int user_id=Integer.parseInt(uid);
 		//sint t_id=Integer.parseInt(tid);
 		double currentBalance=uDao.getByAddBalance(user_id);
@@ -65,12 +69,19 @@ public class TransactionController {
 		
 		
 	}
+	
+//	@PostMapping(value = {"/createtx"}) 
+//	public String txAdd(@RequestBody TransactionDto txd) {
+//		tservice.create(txd);
+//		return "Sucess";
+//	}
+	
+	
+	
 	@GetMapping(value = {"/transaction/{id}"})
-	public Transaction tanxGet(@PathVariable int id) {
+	public List<Transaction> tanxGet(@PathVariable int id) {
 		return tservice.getById(id);
 	}
-	
-	
 	
 	
 

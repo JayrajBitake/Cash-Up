@@ -40,6 +40,9 @@ public interface UserDao extends JpaRepository<UserRegister, Integer> {
 		@Query(value = "update users set total_expense=:texp where uid=:uid",countQuery="update users set total_expense=:texp where uid=:uid" ,nativeQuery=true)
 		@Transactional
 		public void getByChangeTotalExp(@Param("texp") double texp,@Param("uid") int uid);
+		
+		
+		
 
 
 
