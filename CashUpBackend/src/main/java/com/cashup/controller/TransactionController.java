@@ -34,14 +34,16 @@ public class TransactionController {
 	
 	
 	
-	@PostMapping(value = {"/createtx/{uid}/{vid}"}) 
-	public String txAdd(@RequestBody TransactionDto txd,@PathVariable  String uid,@PathVariable  String vid) {
+	@PostMapping(value = {"/createtx/{uid}/{vid}/{price}"}) 
+	public String txAdd(@RequestBody TransactionDto txd,@PathVariable  String uid,@PathVariable  String vid,@PathVariable  Double price ) {
 		//List<Transaction> userTransactions =new ArrayList<>();
 		//userTransactions.add(tx);
 		//ureg.setUserTransactions(userTransactions);
 		int v_id=Integer.parseInt(vid);
 		
-		double purchase=vDao.getByPriceById(v_id);
+		//List<Double> pricelist=vDao.getByPriceById(v_id);
+		double purchase=price;
+		
 		int user_id=Integer.parseInt(uid);
 		//sint t_id=Integer.parseInt(tid);
 		double currentBalance=uDao.getByAddBalance(user_id);
@@ -56,20 +58,32 @@ public class TransactionController {
 		}
 
 		 double netBal=currentBalance-purchase;
-		
+		int txid=txd.getTid();
 		 tservice.create(txd);
+//		 System.out.println(txd.getTamount());
+//		 System.out.println(txd.gettDate());
+		 List<Transaction> list=tDao.findAll();
+		 Transaction last = list.get(list.size() - 1);
 		 
-		 if(purchase>50)
+		 System.out.println(last.getTid());
+		 
+			
+		 
+		 if(purchase>=50)
 		 {
+			 System.out.println(purchase);
 			 double pointsEarned=20*Math.random();
+			 System.out.println(pointsEarned);
 			rewards=rewards+pointsEarned ; 
-			 tDao.getByUpdatePointsEarned(pointsEarned, user_id);
+			 tDao.getByUpdatePointsEarned(pointsEarned,last.getTid());
+			 
 			//return "Congrats u won rewards";
 		 }
-		 
+		 tDao.getByUpdateTamount(purchase,last.getTid());
 		 uDao.getByChangeBal(netBal, user_id);
 		 uDao.getByUpdateRewards(rewards, user_id);
 		 uDao.getByChangeTotalExp(totalExpense, user_id);
+		 
 		 
 		 
 		

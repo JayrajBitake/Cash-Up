@@ -32,6 +32,11 @@ public interface TransactionDao  extends JpaRepository<Transaction, Integer> {
 	 @Transactional//manually commit tx
 	public void getByUpdatePointsEarned(@Param("points_earned") double points_earned,@Param("tid") int tid);
 	 
+	 @Modifying 
+	 @Query(value = "update transaction set tamount=:tamount where tid=:tid",countQuery="update transaction set  tamount=:tamount where tid=:tid" ,nativeQuery=true)
+	 @Transactional//manually commit tx
+	public void getByUpdateTamount(@Param("tamount") double  tamount,@Param("tid") int tid);
+	 
 	 
 	 @Query(value="select * from transaction where uid=:uid",nativeQuery=true)
 		public List<Transaction> findUserId(@Param("uid") int id);

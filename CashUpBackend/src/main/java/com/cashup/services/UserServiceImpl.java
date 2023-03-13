@@ -54,9 +54,10 @@ public class UserServiceImpl implements UserService{
 		
 		return ui;
 		}
-		catch(Exception e) {
-			e.printStackTrace();
-			return null;
+		catch(CustomException e) {
+			//e.printStackTrace();
+			throw new CustomException("Invalid credentials");
+		
 		}
 	}
 
