@@ -11,11 +11,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cashup.dao.UserDao;
+import com.cashup.exception.CustomException;
 import com.cashup.model.Transaction;
 import com.cashup.model.UserRegister;
 import com.cashup.services.UserService;
 
-@CrossOrigin(origins = "http://localhost:3000")
+
+=======
+@CrossOrigin("http://localhost:3000")
+
 @RestController
 public class UserCotroller {
 	@Autowired
@@ -24,8 +28,8 @@ public class UserCotroller {
 	private UserDao uDao;
 	@PostMapping(value = {"/uregister"}) 
 	public String userAdd(@RequestBody UserRegister ureg) {
-		uservice.add(ureg);
-		return "User Registered SucessFully";
+		String s=uservice.add(ureg);
+		return s;
 	}
 	@GetMapping(value = {"/balance/{id}"})
 	public UserRegister balGet(@PathVariable int id) {
@@ -33,7 +37,15 @@ public class UserCotroller {
 	}
 	@GetMapping(value = {"/login/{uname}/{pass}"})
 	public UserRegister userLogin(@PathVariable String uname,@PathVariable String pass){
+		try {
 		return uservice.loadUserByUsername(uname,pass);
+		}
+		catch(CustomException e)
+		{
+			throw new CustomException("User not found");
+			
+		}
+		
 	}
 	@PutMapping(value = {"/update"})
 	public String postUpdate(@RequestBody UserRegister ureg) {

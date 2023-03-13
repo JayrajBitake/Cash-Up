@@ -1,9 +1,12 @@
 package com.cashup.dto;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
+import org.springframework.stereotype.Repository;
 
 import com.cashup.model.Redeem;
 import com.cashup.model.UserRegister;
@@ -19,6 +22,8 @@ public class TransactionDto {
 	@Enumerated(EnumType.STRING)
 	private Redeem isRedeemed;
 	private int uid;
+	
+	
 	public int getTid() {
 		return tid;
 	}

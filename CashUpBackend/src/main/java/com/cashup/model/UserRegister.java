@@ -31,12 +31,12 @@ public class UserRegister {
 	 @Id
 	  @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int uid;
-	  @NotBlank(message = "Please enter proper employee name")
-	    @Size(min=5, message = "Name should be atleast 5 characters")
-	    @Size(max=12, message = "Name should not be greater than 12 characters")
+//	  @NotBlank(message = "Please enter proper employee name")
+//	    @Size(min=5, message = "Name should be atleast 5 characters")
+//	    @Size(max=12, message = "Name should not be greater than 12 characters")
 	private String uname;
-	 @Email(message = "Please enter a valid email Id", regexp="^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\\.[a-zA-Z.]{2,5}")
-	    @NotNull(message = "Please enter a valid email Id")
+//	 @Email(message = "Please enter a valid email Id", regexp="^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\\.[a-zA-Z.]{2,5}")
+//	    @NotNull(message = "Please enter a valid email Id")
 	private String email;
 	private String pass;
 	 @Column(columnDefinition = "integer default 0")

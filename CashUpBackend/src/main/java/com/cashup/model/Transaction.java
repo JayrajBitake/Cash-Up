@@ -22,7 +22,10 @@ public class Transaction {
 	  @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int tid;
 	private Date tDate;
-	 @Column(columnDefinition = "integer default 0")
+	 
+	 
+	 
+	@Column(columnDefinition = "integer default 0")
 	private double tamount;
 	 
 	 @Column(columnDefinition = "integer default 0")
@@ -65,7 +68,7 @@ public class Transaction {
 		return tDate;
 	}
 	public void settDate(Date tDate) {
-		this.tDate = tDate;
+		this.tDate = new Date();
 	}
 	
 	public double getTamount() {

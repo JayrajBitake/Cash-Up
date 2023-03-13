@@ -5,6 +5,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.cashup.dao.UserDao;
+import com.cashup.exception.CustomException;
+
+import java.util.List;
 import java.util.Optional;
 import com.cashup.model.UserRegister;
 @Service
@@ -12,10 +15,25 @@ import com.cashup.model.UserRegister;
 public class UserServiceImpl implements UserService{
 	@Autowired 
 	private UserDao user;
+//	@Autowired
+//    PasswordEncoder passwordEncoder;
 
-	public void add(UserRegister ureg) {
+
+	public String add(UserRegister ureg) {
+		List<UserRegister> list=user.findAll();
+		for(int i=0;i<list.size();i++)
+		{
+			if(ureg.getEmail().equals(list.get(i).getEmail()) && ureg.getMobileno().equals(list.get(i).getMobileno()))
+					{
+						return "Mobile or email already exists";
+					}
+			
+		}
+		//user.setPass(passwordEncoder.encode(ureg.getPass()));
 		
 		user.save(ureg);
+		return "User Registered";
+		
 	}
 
 	@Override
@@ -38,9 +56,10 @@ public class UserServiceImpl implements UserService{
 		
 		return ui;
 		}
-		catch(Exception e) {
-			e.printStackTrace();
-			return null;
+		catch(CustomException e) {
+			//e.printStackTrace();
+			throw new CustomException("Invalid credentials");
+		
 		}
 	}
 
