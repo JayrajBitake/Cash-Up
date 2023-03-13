@@ -42,6 +42,8 @@ public interface UserDao extends JpaRepository<UserRegister, Integer> {
 		public void getByChangeTotalExp(@Param("texp") double texp,@Param("uid") int uid);
 		
 		
+		UserRegister findByUname(String uname);
+		
 		
 
 

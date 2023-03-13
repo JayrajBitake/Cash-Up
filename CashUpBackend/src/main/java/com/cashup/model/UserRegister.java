@@ -1,6 +1,7 @@
 package com.cashup.model;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -18,9 +19,12 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.Data;
+
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+@Data
 @Entity
 @Table(name="users")
 public class UserRegister {
@@ -48,6 +52,8 @@ public class UserRegister {
 	
 	 @Column(columnDefinition = "integer default 0")
 	private Double totalExpense;
+	 
+	private String role;
 	
 	@OneToMany(cascade = CascadeType.ALL,mappedBy="userRegister")
 	@JsonIgnore
@@ -112,6 +118,12 @@ public class UserRegister {
 	}
 	public void setTotalExpense(Double totalExpense) {
 		this.totalExpense = totalExpense;
+	}
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
 	}
 	
 	

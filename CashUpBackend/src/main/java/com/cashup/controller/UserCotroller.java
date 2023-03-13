@@ -15,7 +15,11 @@ import com.cashup.exception.CustomException;
 import com.cashup.model.Transaction;
 import com.cashup.model.UserRegister;
 import com.cashup.services.UserService;
+
+
+=======
 @CrossOrigin("http://localhost:3000")
+
 @RestController
 public class UserCotroller {
 	@Autowired
