@@ -27,9 +27,10 @@ public interface TransactionDao  extends JpaRepository<Transaction, Integer> {
 //	@Query(value = "select sum(points_earned) from transaction where tid=:tid",nativeQuery=true)
 //	public double getByPointsEarned(@Param("tid") int tid);
 	 @Modifying 
-	@Query(value = "insert into transaction(points_earned) values(points_earned=:points_earned)",countQuery="insert into transaction values(points_earned=:points_earned)" ,nativeQuery=true)
+	//@Query(value = "insert into transaction(points_earned) values(points_earned=:points_earned)",countQuery="insert into transaction values(points_earned=:points_earned)" ,nativeQuery=true)
+	 @Query(value = "update transaction set points_earned=:points_earned where tid=:tid",countQuery="update transaction set points_earned=:points_earned where tid=:tid" ,nativeQuery=true)
 	 @Transactional//manually commit tx
-	public void getByUpdatePointsEarned(@Param("points_earned") double points_earned);
+	public void getByUpdatePointsEarned(@Param("points_earned") double points_earned,@Param("tid") int tid);
 	 
 	 
 	 @Query(value="select * from transaction where uid=:uid",nativeQuery=true)

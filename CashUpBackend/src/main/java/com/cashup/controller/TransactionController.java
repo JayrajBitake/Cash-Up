@@ -56,19 +56,22 @@ public class TransactionController {
 		}
 
 		 double netBal=currentBalance-purchase;
-		 double pointsEarned=20*Math.random();
+		
+		 tservice.create(txd);
 		 
 		 if(purchase>50)
 		 {
+			 double pointsEarned=20*Math.random();
 			rewards=rewards+pointsEarned ; 
-			 tDao.getByUpdatePointsEarned(pointsEarned);
+			 tDao.getByUpdatePointsEarned(pointsEarned, user_id);
 			//return "Congrats u won rewards";
 		 }
 		 
 		 uDao.getByChangeBal(netBal, user_id);
 		 uDao.getByUpdateRewards(rewards, user_id);
 		 uDao.getByChangeTotalExp(totalExpense, user_id);
-		 tservice.create(txd);
+		 
+		 
 		
 		 return "purchased";
 		

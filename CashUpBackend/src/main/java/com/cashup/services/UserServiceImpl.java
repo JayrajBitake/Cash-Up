@@ -4,16 +4,34 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cashup.dao.UserDao;
+import com.cashup.exception.CustomException;
+
+import java.util.List;
 import java.util.Optional;
 import com.cashup.model.UserRegister;
 @Service
 public class UserServiceImpl implements UserService{
 	@Autowired 
 	private UserDao user;
+//	@Autowired
+//    PasswordEncoder passwordEncoder;
 
-	public void add(UserRegister ureg) {
+
+	public String add(UserRegister ureg) {
+		List<UserRegister> list=user.findAll();
+		for(int i=0;i<list.size();i++)
+		{
+			if(ureg.getEmail().equals(list.get(i).getEmail()) && ureg.getMobileno().equals(list.get(i).getMobileno()))
+					{
+						return "Mobile or email already exists";
+					}
+			
+		}
+		//user.setPass(passwordEncoder.encode(ureg.getPass()));
 		
 		user.save(ureg);
+		return "User Registered";
+		
 	}
 
 	@Override

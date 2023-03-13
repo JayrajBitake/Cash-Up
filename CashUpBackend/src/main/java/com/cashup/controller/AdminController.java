@@ -2,7 +2,9 @@ package com.cashup.controller;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,11 +17,13 @@ import com.cashup.dao.VendorDao;
 import com.cashup.model.UserRegister;
 import com.cashup.model.Vendor;
 import com.cashup.services.VendorService;
+@CrossOrigin("http://localhost:3000")
 @RestController
 public class AdminController {
 	
 	@Autowired
 	private VendorService vService;
+	
 	@PostMapping(value = {"/addvendor"}) 
 	public String vendorAdd(@RequestBody Vendor vendor) {
 		vService.add(vendor);
@@ -33,7 +37,7 @@ public class AdminController {
 		return " vendor removed successfuly";
 	}
 	
-	@GetMapping(value = {"/vendors"})
+	@GetMapping(value = {"/getallvendor"})
 	public List<Vendor> vendorList(){
 		return vService.getAll();
 	}
