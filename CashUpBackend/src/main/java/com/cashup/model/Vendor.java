@@ -15,8 +15,6 @@ public class Vendor{
 	private  String title;
 	private String description;
 	private double price1;
-	private double price3;
-	private double price2;
 	private float duration;
 	private String brandName;
 	private String image;
@@ -39,18 +37,18 @@ public class Vendor{
 	public void setPrice1(double price1) {
 		this.price1 = price1;
 	}
-	public double getPrice3() {
-		return price3;
-	}
-	public void setPrice3(double price3) {
-		this.price3 = price3;
-	}
-	public double getPrice2() {
-		return price2;
-	}
-	public void setPrice2(double price2) {
-		this.price2 = price2;
-	}
+//	public double getPrice3() {
+//		return price3;
+//	}
+//	public void setPrice3(double price3) {
+//		this.price3 = price3;
+//	}
+//	public double getPrice2() {
+//		return price2;
+//	}
+//	public void setPrice2(double price2) {
+//		this.price2 = price2;
+//	}
 	public float getDuration() {
 		return duration;
 	}

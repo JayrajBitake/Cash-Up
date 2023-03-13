@@ -1,12 +1,14 @@
 package com.cashup.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.cashup.dao.UserDao;
 import java.util.Optional;
 import com.cashup.model.UserRegister;
 @Service
+@Component
 public class UserServiceImpl implements UserService{
 	@Autowired 
 	private UserDao user;
@@ -47,6 +49,11 @@ public class UserServiceImpl implements UserService{
 		user.save(ur);
 		
 	}
+	
+	public UserRegister readByUserName(String uname) {
+		return user.findByUname(uname);
+	}
+
 
 	
 //
